@@ -1,66 +1,52 @@
-# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
+# 📌 Procesamiento de Transacciones - Interbank
 
-## Objetivo:
+## 📖 Introducción
+Este proyecto tiene como objetivo procesar transacciones bancarias a partir de un archivo CSV, generando un reporte con los datos procesados. Se implementó en **Java con Spring Boot** y utiliza **Apache Commons CSV** para la lectura del archivo.
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+## 🚀 Instrucciones de Ejecución
+### 📦 Instalación de Dependencias
+Asegúrate de tener instalado **Java 17** o superior y **Maven**. Luego, instala las dependencias ejecutando:
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+```sh
+mvn clean install
+```
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+### ▶️ Ejecución de la Aplicación
+Para ejecutar el proyecto, utiliza el siguiente comando:
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+```sh
+mvn spring-boot:run
+```
 
----
+La aplicación buscará el archivo `data.csv` en el classpath y procesará sus transacciones.
 
-## Instrucciones
+## 💡 Enfoque y Solución
+### 🔹 Lógica Implementada
+1. **Lectura del archivo CSV:** Se utiliza `CSVReaderUtil` para convertir los registros en objetos `Transaction`.
+2. **Procesamiento de transacciones:** `TransactionController` gestiona las operaciones llamando al servicio de reportes.
+3. **Generación de Reporte:** Se imprime en consola un resumen de las transacciones procesadas.
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+### 🛠️ Decisiones de Diseño
+- **Spring Boot:** Se usó para facilitar la inyección de dependencias y la ejecución de la aplicación.
+- **Apache Commons CSV:** Para leer archivos CSV de manera eficiente.
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+## 📂 Estructura del Proyecto
+```
+procesing-interbank/
+│── src/
+│   ├── main/java/com/cli/procesing/interbank/
+│   │   ├── ProcesingTransactionApplication.java  # Punto de entrada
+│   │   ├── controller/TransactionController.java # Controlador principal
+│   │   ├── model/Transaction.java                # Modelo de transacción
+│   │   ├── util/CSVReaderUtil.java               # Utilidad para leer CSV
+│   ├── test/java/com/cli/procesing/interbank/
+│   │   ├── ProcesingTransactionApplicationTest.java # Pruebas unitarias
+│── data.csv   # Archivo de ejemplo para pruebas
+│── pom.xml    # Archivo de configuración de Maven
+```
 
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
+## 📝 Notas Adicionales
+- Para cambiar la ubicación del archivo CSV, modifícalo en `resources/` o ajusta el `classpath`.
+- Se pueden agregar validaciones adicionales en `CSVReaderUtil` para evitar errores en el parsing.
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
-
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
-
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
-
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
-
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
-
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
